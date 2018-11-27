@@ -194,4 +194,60 @@ typedef struct
 
 FILE* infile;
 
+//11/26
+typedef struct control_node{	//why not use cpp...
+	int cx;
+	struct control_node *next;
+} control_node;
+
+typedef struct control_list{
+	control_node *h, *r;	//head and rear
+} control_list;
+
+void clear_control_list(control_list *l){
+	control_node *h = l->h;
+	control_node *p;
+	while(h){
+		p = (h)->next;
+		free(h);
+		h = p;
+	}
+	l->h = l->r = NULL;
+}
+
+void delete_control_list(control_list *l){
+	control_node *h = l->h;
+	control_node *p;
+	while(h){
+		p = (h)->next;
+		free(h);
+		h = p;
+	}
+	free(l);
+}
+
+void add_item_control_list(control_list *l, control_node *n){
+	control_node *p1;
+	p1 = l->r;
+	if(p1){
+		p1->next = n;
+		l->r = n;
+	}
+	else{
+		l->h = l->r = n;
+	}
+	n->next = NULL;
+
+
+}
+
+void init_control_list(control_list *l){
+	l->h = l->r = NULL;
+}
+
+int is_empty_control_list(control_list *l){
+	if(l->h)	return 1;
+	else return 0;
+}
+
 // EOF PL0.h
