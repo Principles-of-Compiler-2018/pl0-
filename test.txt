@@ -4,7 +4,7 @@ begin
   while i+1<10
   do
     begin
-      if i>8 then break   else   j:=k:=i+1;
+      if i>=8 then break   else   j:=k:=i+1;
       i:=i+1;
     end
 end.
